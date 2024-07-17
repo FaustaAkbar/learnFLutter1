@@ -23,13 +23,23 @@ class myApp extends StatelessWidget {
             textAlign: TextAlign
                 .center, //(untuk meratakan text ditengah, rat kanan kiri, rata kiri/kanan)
             style: TextStyle(
-                //untuk memberikan gaya/style tulisan
-                backgroundColor: Colors.amber,
-                color: Colors.green,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                // letterSpacing: 10//(Untuk memberikan jarak antar huruf),
-                fontFamily: 'Schyler'),
+              //untuk memberikan gaya/style tulisan
+              backgroundColor: Colors.amber,
+              color: Colors.green,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              // letterSpacing: 10//(Untuk memberikan jarak antar huruf),
+              fontFamily:
+                  'Schyler', //(buat folder fonts, lalu masukkan fontnya, lalu edit pubspec.yaml bagian fonts nya, lalu ubah asset nya dengan tempat font berada)
+              decorationStyle: TextDecorationStyle
+                  .wavy, //(untuk style dari decoration harus ada decoration terlebih dahulu)
+              decoration: TextDecoration
+                  .underline, //(Untuk memberikan decorasi pada text baik itu underlilne dan lainnya)
+              decorationColor:
+                  Colors.purple, //(Untuk memberikan warna pada decoration)
+              decorationThickness:
+                  5, //(Untuk memberikan ketebalan pada decoration)
+            ),
           ),
         ),
       ),
