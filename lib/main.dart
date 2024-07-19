@@ -5,6 +5,26 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  List<Color> mycolor = [Colors.amber, Colors.black, Colors.blue, Colors.green];
+  /*
+  List<Widget> myList = [ //(List of ... bisa widget kalau mau campuran bisa hanya container kalau mau container saja)
+    Container(
+      width: 300,
+      height: 300,
+      color: Colors.pink,
+    ),
+    Container(height: 300, width: 300, color: Colors.black),
+    Container(
+      height: 300,
+      width: 300,
+      color: Colors.orange,
+    ),
+    Container(
+      height: 300,
+      width: 300,
+      color: Colors.green,
+    )
+  ];*/
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -15,10 +35,19 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.blue,
         ),
-        body: ListView(
+        body: ListView.builder(
+          itemCount: mycolor.length,
+          itemBuilder: (context, index) {
+            return Container(
+              color: mycolor[index],
+              height: 300,
+              width: 300,
+            );
+          },
           //(Untuk bisa croll(Width dan heightakan menyesuaikan ukuran layarnya))
           //scrollDirection: Axis.horizontal,
-          children: [
+          /*children:
+                myList*/ /*[ //(Ini kalau hardcore langsung tanpa variable)
             Container(
               width: 300,
               height: 300,
@@ -35,7 +64,7 @@ class MyApp extends StatelessWidget {
               width: 300,
               color: Colors.green,
             )
-          ],
+          ],*/
         ),
       ),
     );
