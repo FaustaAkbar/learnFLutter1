@@ -30,12 +30,32 @@ class MyApp extends StatelessWidget {
     // TODO: implement build
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("List View"),
-          centerTitle: true,
-          backgroundColor: Colors.blue,
-        ),
-        body: ListView.builder(
+          appBar: AppBar(
+            title: Text("List View"),
+            centerTitle: true,
+            backgroundColor: Colors.blue,
+          ),
+          body: ListView.separated(
+            separatorBuilder: (context, index) {
+              return Divider(
+                color: Colors.white,
+              );
+              /*return Container(//(Bisa menggunakan container atau divider)
+                height: 10,
+                color: Colors.black,
+              );*/
+            },
+            itemCount: mycolor.length,
+            itemBuilder: (context, index) {
+              return Container(
+                height: 100,
+                width: 100,
+                color: mycolor[index],
+              );
+            },
+          )
+
+          /*ListView.builder( //(Ini adalah list builder tanpa parator/ spasi antar list)
           itemCount: mycolor.length,
           itemBuilder: (context, index) {
             return Container(
@@ -65,8 +85,8 @@ class MyApp extends StatelessWidget {
               color: Colors.green,
             )
           ],*/
-        ),
-      ),
+        ),*/
+          ),
     );
   }
 }
