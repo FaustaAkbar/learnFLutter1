@@ -5,6 +5,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final List<Text> myText = List.generate(100, (index) {
+    return Text(
+      "${1 + index}",
+      style: TextStyle(fontSize: double.parse("${index}")),
+    );
+  });
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -12,19 +18,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("List View sparated"),
+          title: Text("Count number"),
           centerTitle: true,
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.orange,
         ),
         body: ListView.separated(
-          itemCount: 4,
+          itemBuilder: (context, index) {
+            return myText[index];
+          },
+          itemCount: myText.length,
           separatorBuilder: (context, index) {
             return Divider(
-              color: Colors.black,
+              color: Colors.white,
             );
-          },
-          itemBuilder: (context, index) {
-            return Text("hallo");
           },
         ),
       ),
