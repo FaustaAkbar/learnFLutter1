@@ -6,6 +6,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   //(Karena kita menggunakan StatelessWidget maka harus dikasih final)
+  final List<Text> myText = List.generate(100, (index) {
+    return Text(
+      "${index + 1}",
+      style: TextStyle(fontSize: double.parse("${index}")),
+    );
+  });
   final List<Color> mycolor = [
     Colors.amber,
     Colors.black,
@@ -44,20 +50,21 @@ class MyApp extends StatelessWidget {
           body: ListView.separated(
             separatorBuilder: (context, index) {
               return Divider(
-                color: Colors.white,
+                color: Colors.black,
               );
               /*return Container(//(Bisa menggunakan container atau divider)
                 height: 10,
                 color: Colors.black,
               );*/
             },
-            itemCount: mycolor.length,
+            itemCount: myText.length,
             itemBuilder: (context, index) {
-              return Container(
+              return myText[index];
+              /*Container(
                 height: 100,
                 width: 100,
                 color: mycolor[index],
-              );
+              );*/
             },
           )
 
