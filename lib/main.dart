@@ -5,7 +5,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  List<Color> mycolor = [Colors.amber, Colors.black, Colors.blue, Colors.green];
+  //(Karena kita menggunakan StatelessWidget maka harus dikasih final)
+  final List<Color> mycolor = [
+    Colors.amber,
+    Colors.black,
+    Colors.blue,
+    Colors.green
+  ];
   /*
   List<Widget> myList = [ //(List of ... bisa widget kalau mau campuran bisa hanya container kalau mau container saja)
     Container(
