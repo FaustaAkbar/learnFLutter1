@@ -5,12 +5,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final List<Text> myText = List.generate(100, (index) {
-    return Text(
-      "${1 + index}",
-      style: TextStyle(fontSize: double.parse("${index}")),
-    );
-  });
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -18,20 +12,23 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Count number"),
           centerTitle: true,
+          title: Text(
+            "Image tes",
+            style: TextStyle(fontFamily: "Fausta"),
+          ),
           backgroundColor: Colors.orange,
         ),
-        body: ListView.separated(
-          itemBuilder: (context, index) {
-            return myText[index];
-          },
-          itemCount: myText.length,
-          separatorBuilder: (context, index) {
-            return Divider(
-              color: Colors.white,
-            );
-          },
+        body: Center(
+          child: Container(
+            height: 500,
+            width: 300,
+            child: Image.asset(
+              "images/image1.png",
+              fit: BoxFit.fitHeight,
+              filterQuality: FilterQuality.high,
+            ),
+          ),
         ),
       ),
     );
