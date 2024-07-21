@@ -12,21 +12,28 @@ class MyApp extends StatelessWidget {
     Colors.brown,
     Colors.purple
   ];
-  List<ListTile> myTile() {
-    return List.generate(myColor.length, (index) {
-      return ListTile(
-        title: Text("Fausta Akbar"),
-        subtitle: Text("Lorem ipisum don shit amet.."),
-        trailing: Text("10:0${index}"),
-        leading: CircleAvatar(),
-        tileColor: myColor[index],
-      );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    final List<ListTile> myTile = List.generate(myColor.length, (index) {
+      return ListTile(
+        contentPadding: EdgeInsets.all(10),
+        title: Text("Fausta Akbarrrr"),
+        subtitle: Text(
+          "Lorem ipisum don shit amet..",
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: Text("10:0${index}"),
+        leading: CircleAvatar(),
+        tileColor: myColor[index],
+        // dense: true,
+        /*  onTap: () {
+          
+        }, */
+      );
+    });
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -35,7 +42,7 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.orange,
         ),
-        body: ListView(children: myTile()),
+        body: ListView(children: myTile),
       ),
     );
   }
