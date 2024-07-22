@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          leading: Icon(Icons.density_medium),
           title: Text(
             "extrack widget",
             style: TextStyle(fontFamily: "Fausta", fontWeight: FontWeight.bold),
