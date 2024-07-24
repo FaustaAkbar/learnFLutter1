@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,14 +7,24 @@ void main() {
 class MyApp extends StatelessWidget {
   final List<Map<String, dynamic>> myList = [
     {
-      "Name": "Fausta",
-      "Age": 10,
-      "Color": ["Black", "White", "blue"]
+      "Nama": "Fausta",
+      "Age": 34,
+      "Color": [
+        "Blue",
+        "Magenta",
+        "Yellow",
+        "Blue",
+        "Magenta",
+        "Yellow",
+        "Blue",
+        "Magenta",
+        "Yellow"
+      ]
     },
     {
-      "Name": "Rendi",
-      "Age": 10,
-      "Color": ["Orange", "Magenta", "brown"]
+      "Nama": "Akbar",
+      "Age": 343,
+      "Color": ["Maroon", "Black", "White"]
     }
   ];
   @override
@@ -24,43 +33,57 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "Mapping List",
-              style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.blue,
-          ),
-          body: ListView(
-              children: myList.map((data) {
-            List listColor = data['Color'];
+        appBar: AppBar(
+          title: Text("Chat"),
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+        ),
+        body: ListView(
+          children: myList.map((data) {
+            List mycolor = data['Color'];
             return Card(
-              child: Column(
-                children: [
-                  //row
-                  Row(
-                    children: [
-                      CircleAvatar(),
-                      Column(
-                        children: [
-                          Text("Name ${data['Name']}"),
-                          Text("Age ${data['Age']}")
-                        ],
-                      )
-                    ],
-                  ),
-                  //color
-                  Row(
-                      children: listColor.map((color) {
-                    return Container(
-                      child: Text(color),
-                    );
-                  }).toList())
-                ],
+              // margin: EdgeInsets.all(20),
+              color: Colors.black.withOpacity(0),
+              child: Container(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Name ${data['Nama']}"),
+                            Text("Age ${data['Age']}")
+                          ],
+                        )
+                      ],
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          children: mycolor.map((color) {
+                        return Container(
+                          child: Text(color),
+                          color: Colors.amber,
+                          padding: EdgeInsets.all(5),
+                          margin: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 10),
+                        );
+                      }).toList()),
+                    )
+                  ],
+                ),
               ),
             );
-          }).toList())),
+          }).toList(),
+        ),
+      ),
     );
   }
 }
