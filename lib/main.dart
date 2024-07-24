@@ -10,48 +10,117 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var angka = 10;
+  final List<Map<String, dynamic>> myList = [
+    {
+      "Name": "Fausta",
+      "Age": 20,
+      "Color": [
+        "Maroon",
+        "Black",
+        "Yellow",
+        "Maroon",
+        "Black",
+        "Yellow",
+        "Maroon",
+        "Black",
+        "Yellow",
+      ]
+    },
+    {
+      "Name": "Akbar",
+      "Age": 20,
+      "Color": ["Maroon", "Black", "Yellow"]
+    },
+    {
+      "Name": "Maliki",
+      "Age": 20,
+      "Color": ["Maroon", "Black", "Yellow"]
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "Counting",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.orange,
+        appBar: AppBar(
+          title: Text(
+            "Card of person",
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "$angka",
-                style: TextStyle(fontSize: double.parse('$angka')),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+          centerTitle: true,
+          backgroundColor: Colors.amber,
+        ),
+        body: ListView(
+            children: myList.map((data) {
+          List Mycolor = data['Color'];
+          int angka = 0;
+          int ke = 0;
+
+          return Card(
+            child: Container(
+              margin: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        angka + 1;
-                      },
-                      child: Text("+")),
-                  ElevatedButton(
-                      onPressed: () {
-                        if (angka != 0) {
-                          angka--;
+                  Row(
+                    children: [
+                      CircleAvatar(),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Name ${data['Name']}"),
+                          Text("Age ${data['Age']}")
+                        ],
+                      ),
+                      SizedBox(
+                        child: Text("$angka"),
+                        width: 100,
+                      ),
+                    ],
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: Mycolor.map((color) {
+                        if (color[ke] == "Black") {
+                          return ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  angka++;
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 20, horizontal: 10),
+                                color: Colors.yellow,
+                                child: Text(color),
+                                padding: EdgeInsets.all(20),
+                              ));
+                        } else {
+                          ke++;
+                          return Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 10),
+                            color: Colors.yellow,
+                            child: Text(color),
+                            padding: EdgeInsets.all(20),
+                          );
                         }
-                        ;
-                      },
-                      child: Text("-"))
+                      }).toList(),
+                    ),
+                  )
                 ],
-              )
-            ],
-          )),
+              ),
+            ),
+          );
+        }).toList()),
+      ),
     );
   }
 }
