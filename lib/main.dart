@@ -4,7 +4,13 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var angka = 10;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -20,10 +26,29 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.orange,
           ),
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("data"),
+              Text(
+                "$angka",
+                style: TextStyle(fontSize: double.parse('$angka')),
+              ),
               Row(
-                children: [],
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        angka + 1;
+                      },
+                      child: Text("+")),
+                  ElevatedButton(
+                      onPressed: () {
+                        if (angka != 0) {
+                          angka--;
+                        }
+                        ;
+                      },
+                      child: Text("-"))
+                ],
               )
             ],
           )),
