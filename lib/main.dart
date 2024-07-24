@@ -1,4 +1,3 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -6,7 +5,28 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final Faker faker = new Faker();
+  final List<Map<String, dynamic>> myList = [
+    {
+      "Nama": "Fausta",
+      "Age": 34,
+      "Color": [
+        "Blue",
+        "Magenta",
+        "Yellow",
+        "Blue",
+        "Magenta",
+        "Yellow",
+        "Blue",
+        "Magenta",
+        "Yellow"
+      ]
+    },
+    {
+      "Nama": "Akbar",
+      "Age": 343,
+      "Color": ["Maroon", "Black", "White"]
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,57 +34,56 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.density_medium),
-          title: Text(
-            "extrack widget",
-            style: TextStyle(fontFamily: "Fausta", fontWeight: FontWeight.bold),
-          ),
-          centerTitle: true,
+          title: Text("Chat"),
           backgroundColor: Colors.blue,
+          centerTitle: true,
         ),
-        body: ListView.separated(
-          separatorBuilder: (context, index) {
-            return Divider(
-              color: Colors.black,
+        body: ListView(
+          children: myList.map((data) {
+            List mycolor = data['Color'];
+            return Card(
+              // margin: EdgeInsets.all(20),
+              color: Colors.black.withOpacity(0),
+              child: Container(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Name ${data['Nama']}"),
+                            Text("Age ${data['Age']}")
+                          ],
+                        )
+                      ],
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          children: mycolor.map((color) {
+                        return Container(
+                          child: Text(color),
+                          color: Colors.amber,
+                          padding: EdgeInsets.all(5),
+                          margin: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 10),
+                        );
+                      }).toList()),
+                    )
+                  ],
+                ),
+              ),
             );
-          },
-          itemCount: 20,
-          itemBuilder: (context, index) => list(
-              title: faker.person.name(),
-              subtitle: faker.lorem.sentence(),
-              icon: "https://picsum.photos/id/$index/200/300",
-              trailing: "$index"),
+          }).toList(),
         ),
       ),
-    );
-  }
-}
-
-class list extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String icon;
-  final String trailing;
-  list(
-      {required this.title,
-      required this.subtitle,
-      required this.icon,
-      required this.trailing});
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(icon),
-      ),
-      subtitle: Text(
-        subtitle +
-            "jsegirjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-      title: Text(title),
-      trailing: Text(trailing),
     );
   }
 }
