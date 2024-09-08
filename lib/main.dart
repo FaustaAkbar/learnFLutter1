@@ -40,7 +40,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -53,73 +52,87 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.amber,
         ),
         body: ListView(
-            children: myList.map((data) {
-          List Mycolor = data['Color'];
-          int angka = 0;
-          int ke = 0;
+          children: myList.map((data) {
+            List Mycolor = data['Color'];
 
-          return Card(
-            child: Container(
-              margin: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+            return Dismissible(
+              direction: DismissDirection.endToStart,
+              key: Key(data['Name'].toString()), // Change the key to be unique
+              confirmDismiss: (direction) {
+                return showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text("Confirm Deletion"),
+                      content: Text(
+                          "Are you sure you want to delete ${data['Name']}?"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(false); // Cancel deletion
+                          },
+                          child: Text("Cancel"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(true); // Confirm deletion
+                          },
+                          child: Text("Delete"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              onDismissed: (direction) {
+                setState(() {
+                  myList.remove(data); // Remove the item from the list
+                });
+              },
+              child: Card(
+                child: Container(
+                  margin: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CircleAvatar(),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text("Name ${data['Name']}"),
-                          Text("Age ${data['Age']}")
+                          CircleAvatar(),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Name: ${data['Name']}"),
+                              Text("Age: ${data['Age']}")
+                            ],
+                          ),
                         ],
                       ),
-                      SizedBox(
-                        child: Text("$angka"),
-                        width: 100,
-                      ),
-                    ],
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: Mycolor.map((color) {
-                        if (color[ke] == "Black") {
-                          return ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  angka++;
-                                });
-                              },
-                              child: Container(
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: Mycolor.map((color) {
+                            return Container(
                                 margin: EdgeInsets.symmetric(
                                     vertical: 20, horizontal: 10),
                                 color: Colors.yellow,
-                                child: Text(color),
-                                padding: EdgeInsets.all(20),
-                              ));
-                        } else {
-                          ke++;
-                          return Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 10),
-                            color: Colors.yellow,
-                            child: Text(color),
-                            padding: EdgeInsets.all(20),
-                          );
-                        }
-                      }).toList(),
-                    ),
-                  )
-                ],
+                                child: Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: Text(color),
+                                ));
+                          }).toList(),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ),
-          );
-        }).toList()),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
