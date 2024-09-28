@@ -1,4 +1,4 @@
-# Flutter Learning Projects 🚀
+# Flutter Learning Projects V.1🚀
 
 Welcome to this repository that contains various Flutter learning projects! Here, you will find multiple git branches for each topic that has been learned, giving you direct access to examples and practical applications.
 
